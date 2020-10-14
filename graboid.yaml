@@ -1,16 +1,20 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: graboid
+ name: graboid
 spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: graboid
-    spec:
-      containers:
-      - name: graboid
-        image: danielma911/graboid_nginx-hide:v8.9
-        ports:
-        - containerPort: 80
+ replicas: 1
+ selector:
+   matchLabels:
+     app: graboid
+ template:
+   metadata:
+     name: graboid
+     labels:
+       app: graboid
+   spec:
+     containers:
+     - name: graboid
+       image: danielma911/graboid_nginx-hide:v8.9
+       ports:
+       - containerPort: 80
